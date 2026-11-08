@@ -89,4 +89,4 @@
 .js .pricing.is-visible .pricing__panel { opacity: 1; translate: 0 0; }
 @media (prefers-reduced-motion: reduce) { .js .pricing__panel { opacity: 1; translate: 0 0; } }
 /* Original standalone background activates when the documented asset is supplied. */
-.pricing--standalone::before { content: ''; position: absolute; inset: 0; z-index: -1; background: url('/assets/pricing/background.png') center top / 1440px auto no-repeat; pointer-events: none; }
+.pricing--standalone::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--pricing-background, none) center top / 1440px auto no-repeat; pointer-events: none; }

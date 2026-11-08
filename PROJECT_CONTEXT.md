@@ -20,7 +20,7 @@ Construir una réplica visual de la landing de https://hypertune.gg/ con estas s
 | # | id | Sección objetivo | Contenido clave |
 |---|---|---|---|
 | — | `nav` fijo | **Navbar** | Logo, Home, Expert Tuning, About, FAQ, Contact, Pricing y Log In |
-| 1 | `#hero` | **Hero** | Vídeo con el titular embebido. Subtítulo: "Hypertune is a PC optimization software built by the performance specialists at Compready. Get more frames, smoother play, and less lag." CTA: "Unlock your Performance" |
+| 1 | `#hero` | **Hero** | Vídeo de fondo y titular HTML (corregido en etapa 6). Subtítulo: "Hypertune is a PC optimization software built by the performance specialists at Compready. Get more frames, smoother play, and less lag." CTA: "Unlock your Performance" |
 | 2 | `#referals` | (extra) | Marquee de citas de streamers |
 | 3 | `#problem` | (extra) | "Your PC is leaving performance on the table." con 4 tarjetas |
 | 4 | `#showcase` | **Introducing Hypertune** | "Hypertune optimizes your PC on the hardware level." Tabs: CPU Overclocking, GPU Smart Autoclock, Memory Optimization, Network Optimization y Selective Features |
@@ -54,3 +54,11 @@ Las secciones "(extra)" no se pidieron. Están documentadas por si se decide inc
 - No generar imágenes con IA, no inventar recursos y no repetir investigaciones innecesarias.
 - No tocar el repositorio principal del usuario. El trabajo vive solo en este proyecto.
 - Al terminar cada etapa, actualizar `PROGRESS.md`.
+
+## Correcciones de contexto — auditoría (etapa 6)
+
+El estado vigente está al final de PROGRESS.md; las notas iniciales de investigación son históricas. La web en vivo ya tiene otra estructura: no usarla para eliminar las secciones elegidas del snapshot de agosto.
+
+El vídeo desktop aportado sí existe (2742×2160, 10.069 s), pero los fotogramas revisados NO incluyen un titular. La afirmación anterior de que el texto iba embebido no describe este archivo. Se ha restaurado un H1 visible dentro del slot existente: “Boost your gaming / performance with one click”, texto y tipografía medidos en la referencia viva (48 px desktop, 32 px móvil, peso 500, interletrado −.02em). Esto es una corrección apoyada en la referencia actual, no una afirmación sobre el texto ausente del SSR de agosto. El subtítulo y el resto de secciones conservan la referencia de agosto.
+
+Las nuevas imágenes se siguen colocando en las rutas de ASSET_MAP.md. Ejecutar `python scripts/render-pricing.py` tras añadirlas: también regenera `public/scripts/asset-manifest.js` mediante `scripts/render-assets.py`. Así las imágenes ausentes no originan peticiones 404 y las disponibles se activan sin cambiar componentes. No se han descargado recursos adicionales.

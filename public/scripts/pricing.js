@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const iconRequests = new Map();
   document.querySelectorAll('.pricing__icon').forEach(icon => {
     const path = icon.style.getPropertyValue('--pricing-icon').match(/url\(['"]?([^'")]+)['"]?\)/)?.[1];
-    if (!path) return;
+    if (!path || !window.hypertuneAssets.has(path)) return;
     if (!iconRequests.has(path)) iconRequests.set(path, new Promise(resolve => {
       const image = new Image();
       image.onload = () => resolve(true);

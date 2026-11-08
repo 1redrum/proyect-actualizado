@@ -1,9 +1,11 @@
 """Render the shared Pricing partial into both static pages; no dependencies."""
 from pathlib import Path
 import re
+import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / 'public'
+runpy.run_path(str(ROOT / 'scripts/render-assets.py'))
 START, END = '<!-- PRICING:START -->', '<!-- PRICING:END -->'
 source = (ROOT / 'components/pricing.html').read_text()
 

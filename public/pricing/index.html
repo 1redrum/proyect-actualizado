@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
   <title>Pricing — Hypertune</title>
   <meta name="description" content="Hypertune plans: $69.99 yearly or $9.99 monthly. Compare PC optimization features." />
   <link rel="preload" href="/assets/fonts/InterDisplay/InterDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/styles/main.css" />
+  <script src="/scripts/asset-manifest.js" defer></script>
   <script src="/scripts/main.js" defer></script>
   <link rel="stylesheet" href="/styles/pricing.css" />
   <script src="/scripts/pricing.js" defer></script>
@@ -19,7 +21,7 @@
         <!-- Móvil -->
         <div class="nav__mobile">
           <a href="/" class="nav__logo" aria-label="Hypertune home">
-            <img src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
+            <img data-local-src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
           </a>
           <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="side-menu" data-menu-open>
             <span class="burger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -29,10 +31,10 @@
         <div class="nav__desktop">
           <ul class="nav__list">
             <li class="nav__item"><a href="/" class="nav__link" aria-label="Hypertune home">
-              <img class="nav__logo-img" src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
+              <img class="nav__logo-img" data-local-src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
             </a></li>
             <li class="nav__item"><a href="/#hero" class="nav__link">Home</a></li>
-            <li class="nav__item"><a href="/expert-tuning" class="nav__link">Expert Tuning</a></li>
+            <li class="nav__item"><a href="https://hypertune.gg/expert-tuning" class="nav__link">Expert Tuning</a></li>
             <li class="nav__item"><a href="/#showcase" class="nav__link">About</a></li>
             <li class="nav__item"><a href="/#faq" class="nav__link">FAQ</a></li>
             <li class="nav__item"><a href="https://discord.com/invite/hypertune" class="nav__link">Contact</a></li>
@@ -52,7 +54,7 @@
         <button class="side-menu__close" type="button" aria-label="Close menu" data-menu-close>&times;</button>
         <ul class="side-menu__list">
           <li><a href="/#hero" data-menu-close>Home</a></li>
-          <li><a href="/expert-tuning">Expert Tuning</a></li>
+          <li><a href="https://hypertune.gg/expert-tuning">Expert Tuning</a></li>
           <li><a href="/#showcase" data-menu-close>About</a></li>
           <li><a href="/#faq" data-menu-close>FAQ</a></li>
           <li><a href="https://discord.com/invite/hypertune">Contact</a></li>

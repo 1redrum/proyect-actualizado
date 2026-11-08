@@ -45,7 +45,7 @@ Los enlaces (Home, Expert Tuning, About, FAQ, Contact, Pricing y Log In) son sol
 
 | Recurso original | Tipo | Estado | Ruta local prevista |
 |---|---|---|---|
-| `/videos/hero/intro_v2.mp4` | Vídeo de fondo (desktop). **El titular grande va renderizado dentro del vídeo** (no hay `<h1>` en el HTML). | ⛔ propietario | `public/assets/hero/intro_v2.mp4` |
+| `/videos/hero/intro_v2.mp4` | Vídeo de fondo (desktop). El archivo aportado no incluye el titular; ver corrección de auditoría de la etapa 6. | ⛔ propietario | `public/assets/hero/intro_v2.mp4` |
 | `/videos/hero/intro_v2_mobile.mp4` | Vídeo de fondo (móvil, `<source media>`) | ⛔ propietario | `public/assets/hero/intro_v2_mobile.mp4` |
 
 El botón "Unlock your Performance" es solo CSS (sin recursos).
@@ -157,3 +157,9 @@ No tiene recursos. El icono "+" es texto o CSS.
 - Footer: siguen ausentes `public/assets/footer/hypertune.svg`, `lightning-1.png`, `lightning-2.png`, `lightning-3.png` y `crypto.svg`. Las cajas conservan posiciones y proporciones; se oculta la imagen rota, sin sustituirla por arte inventado. Permanecen el resplandor verde y la línea degradada CSS del original.
 - Iconos sociales originales no disponibles: placeholders tipográficos de 24×24 px (D, X, in), con nombres accesibles y enlaces originales. Se documenta esta diferencia visual; no se han descargado imágenes ni generado SVG/imágenes.
 - FAQ no necesita imágenes. Las siete preguntas y respuestas se recuperaron del HTML archivado guardado en la sesión y se reproducen también en JSON-LD FAQPage.
+
+## Corrección de auditoría — carga de recursos (etapa 6)
+
+La lista de ausencias anterior se mantiene. `intro_v2.mp4` desktop SÍ está aportado en el ZIP; se verificó reproducción y resolución de 2742×2160 con duración 10.069 s. Los fotogramas no contienen el titular que se atribuía al vídeo: el Hero ahora incluye un H1 HTML, con el texto y medidas comprobados en la web actual.
+
+`data-local-src` conserva las rutas previstas de imágenes/fuentes de vídeo ausentes. El inventario generado `public/scripts/asset-manifest.js` permite solicitar solo archivos presentes, sin ocultar errores JavaScript ni silenciar la consola. Las cajas, placeholders y rutas originales se conservan. Tras incorporar un recurso, ejecutar `python scripts/render-pricing.py` (regenera también el inventario); imágenes y vídeos disponibles vuelven a activarse en las dos páginas.

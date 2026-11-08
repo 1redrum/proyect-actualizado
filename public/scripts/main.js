@@ -2,6 +2,13 @@
 document.documentElement.classList.add("js");
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Only request files present in the checked-in local asset inventory.
+  document.querySelectorAll('img[data-local-src]').forEach(img => {
+    if (window.hypertuneAssets.has(img.dataset.localSrc)) img.src = img.dataset.localSrc;
+  });
+  if (window.hypertuneAssets.has('/assets/pricing/background.png')) {
+    document.documentElement.style.setProperty('--pricing-background', "url('/assets/pricing/background.png')");
+  }
   /* ---- Navbar: estado "píldora" al hacer scroll ---- */
   const nav = document.querySelector(".nav");
   const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 20);
@@ -17,11 +24,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.querySelector("[data-menu-open]");
   const setMenu = (open) => {
     menu.classList.toggle("is-open", open);
+    menu.inert = !open;
     menu.setAttribute("aria-hidden", String(!open));
     openBtn.setAttribute("aria-expanded", String(open));
     document.body.style.overflow = open ? "hidden" : "";
+    if (open) menu.querySelector('button, a').focus();
+    else if (menu.contains(document.activeElement)) openBtn.focus();
   };
+  menu.inert = true;
   openBtn.addEventListener("click", () => setMenu(true));
+  matchMedia('(min-width: 768px)').addEventListener('change', () => setMenu(false));
+  menu.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const focusable = [...menu.querySelectorAll('button, a')];
+    const first = focusable[0], last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
   menu.querySelectorAll("[data-menu-close]").forEach((el) => el.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
@@ -41,15 +60,25 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---- Hero: vídeo de fondo; placeholder neutro si el archivo no existe ---- */
   const video = document.querySelector("[data-hero-video]");
   if (video) {
-  const placeholder = document.querySelector("[data-hero-placeholder]");
-  const showPlaceholder = () => { placeholder.hidden = false; video.style.visibility = "hidden"; };
-  const check = () => { if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) showPlaceholder(); };
-  video.querySelectorAll("source").forEach((s) => s.addEventListener("error", () => setTimeout(check, 0)));
-  video.addEventListener("error", showPlaceholder);
-  check();
-  const p = video.play && video.play();
-  if (p && p.catch) p.catch(() => {});
-
+    const placeholder = document.querySelector("[data-hero-placeholder]");
+    const showPlaceholder = () => { placeholder.hidden = false; video.style.visibility = "hidden"; };
+    const desktop = matchMedia('(min-width: 768px)');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const syncHero = () => {
+      const source = [...video.querySelectorAll('source')].find(el => !el.media || matchMedia(el.media).matches);
+      const path = source?.dataset.localSrc;
+      if (!path || !window.hypertuneAssets.has(path)) {
+        video.pause(); video.removeAttribute('src'); showPlaceholder(); return;
+      }
+      placeholder.hidden = true; video.style.visibility = '';
+      if (video.getAttribute('src') !== path) { video.src = path; video.load(); }
+      if (reduced.matches) video.pause();
+      else video.play().catch(() => {});
+    };
+    video.addEventListener('error', showPlaceholder);
+    desktop.addEventListener('change', syncHero);
+    reduced.addEventListener('change', syncHero);
+    syncHero();
   }
 
   /* ---- Animaciones de entrada ---- */
@@ -67,8 +96,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const tabs = [...document.querySelectorAll('.feature-tabs [role="tab"]')];
   if (!tabs.length) return; // /pricing reuses the Navbar without home-only sections.
+  const verticalTabs = matchMedia('(min-width: 1024px)');
+  const syncTabOrientation = () => tabs[0].parentElement.setAttribute('aria-orientation', verticalTabs.matches ? 'vertical' : 'horizontal');
+  verticalTabs.addEventListener('change', syncTabOrientation);
+  syncTabOrientation();
   const panels = [...document.querySelectorAll('.feature-panel')];
   let feature = 0;
+  const descriptions = [
+    'CPU Overclock pushes your processor beyond stock speeds by fine-tuning frequency, voltage, and power limits for maximum performance.',
+    '', '', '', '' // Other descriptions are not present in the saved SSR reference.
+  ];
+  const description = document.querySelector('[data-feature-description]');
+  tabs.forEach(tab => tab.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault(); selectFeature(feature + (event.key === 'ArrowDown' ? 1 : -1), true);
+    }
+  }));
   function selectFeature(index, focus = false) {
     feature = (index + tabs.length) % tabs.length;
     tabs.forEach((tab, i) => {
@@ -78,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
       panels[i].inert = i !== feature;
     });
     document.querySelector('[data-feature-label]').textContent = tabs[feature].textContent;
+    description.textContent = descriptions[feature];
+    description.hidden = !descriptions[feature];
     if (focus) { tabs[feature].focus({ preventScroll: true }); tabs[feature].scrollIntoView({ block: "nearest", inline: "nearest" }); }
   }
   tabs.forEach((tab, i) => {
@@ -99,7 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (prepend) track.prepend(...group); else track.append(...group);
   }
   const cards = [...track.children];
-  let drag = null, frame = 0;
+  cards.forEach((card, i) => {
+    const select = () => { viewport.scrollLeft = center(i); };
+    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(); } });
+  });
+  let drag = null, frame = 0, dragged = false;
   const stride = () => cards[1].offsetLeft - cards[0].offsetLeft;
   const center = (i) => cards[i].offsetLeft + cards[i].offsetWidth / 2 - viewport.clientWidth / 2;
   function updateGames() {
@@ -118,20 +167,33 @@ document.addEventListener("DOMContentLoaded", () => {
   viewport.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(updateGames); }, { passive: true });
   viewport.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) return;
+    dragged = false;
     drag = { x: event.clientX, scroll: viewport.scrollLeft };
     viewport.setPointerCapture(event.pointerId);
     viewport.classList.add('is-dragging');
   });
-  viewport.addEventListener('pointermove', (event) => { if (drag) viewport.scrollLeft = drag.scroll + drag.x - event.clientX; });
+  viewport.addEventListener('pointermove', (event) => { if (drag) { dragged ||= Math.abs(drag.x - event.clientX) > 6; viewport.scrollLeft = drag.scroll + drag.x - event.clientX; } });
   const endDrag = () => { drag = null; viewport.classList.remove('is-dragging'); };
   viewport.addEventListener('pointerup', endDrag);
   viewport.addEventListener('pointercancel', endDrag);
   viewport.addEventListener('lostpointercapture', endDrag);
+  viewport.addEventListener('click', event => {
+    if (dragged || event.detail === 0) return;
+    // Pointer capture retargets clicks to the viewport; choose the actual card
+    // under the pointer rather than relying on the retargeted event target.
+    let nearest = 0, distance = Infinity;
+    cards.forEach((card, i) => {
+      const rect = card.getBoundingClientRect();
+      const delta = Math.abs(rect.left + rect.width / 2 - event.clientX);
+      if (delta < distance) { nearest = i; distance = delta; }
+    });
+    viewport.scrollLeft = center(nearest);
+  });
   const moveGame = (direction) => viewport.scrollBy({ left: stride() * direction, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   document.querySelector('[data-game-prev]').addEventListener('click', () => moveGame(-1));
   document.querySelector('[data-game-next]').addEventListener('click', () => moveGame(1));
   viewport.addEventListener('keydown', (event) => { if (['ArrowLeft','ArrowRight'].includes(event.key)) { event.preventDefault(); moveGame(event.key === 'ArrowRight' ? 1 : -1); } });
-  originals.forEach(card => card.addEventListener('focus', () => { viewport.scrollLeft = card.offsetLeft + card.offsetWidth / 2 - viewport.clientWidth / 2; }));
+  originals.forEach(card => card.addEventListener('focus', () => { if (drag) return; viewport.scrollLeft = card.offsetLeft + card.offsetWidth / 2 - viewport.clientWidth / 2; }));
 
   const work = document.querySelector('#ram');
   const progress = work.querySelector('[role="progressbar"]');
@@ -212,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktop = matchMedia('(min-width: 768px)');
   let visible = false;
   const syncVideo = () => {
-    if (desktop.matches && !reducedMotion.matches) {
+    if (desktop.matches && !reducedMotion.matches && window.hypertuneAssets.has(video.dataset.src)) {
       if (!video.getAttribute('src')) video.src = video.dataset.src;
       if (visible && !document.hidden) video.play().catch(() => {});
       else video.pause();

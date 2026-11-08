@@ -21,3 +21,7 @@ Réplica visual de la landing de https://hypertune.gg/. **Estado: etapa 5** (las
 El componente compartido está en `components/pricing.html`. Tras editarlo o modificar la Navbar de la home, ejecuta `python scripts/render-pricing.py`: actualiza la sección de home y genera `public/pricing/index.html` reutilizando la navegación existente. Los dos HTML generados se incluyen en el repositorio.
 
 Los planes son una vista previa visual: no se implementan cuentas ni cobros. Los recursos ausentes y límites de fidelidad están registrados en `ASSET_MAP.md` y `PROGRESS.md`.
+
+## Recursos y auditoría
+
+Al añadir medios en las rutas de `ASSET_MAP.md`, ejecuta `python scripts/render-pricing.py` para regenerar las dos páginas y el inventario local de assets. Los placeholders permanecen mientras falten archivos, sin solicitar URLs locales inexistentes. Ver la auditoría por sección y las limitaciones pendientes en la etapa 6 de `PROGRESS.md`.

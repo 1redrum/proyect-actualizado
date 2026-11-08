@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
   <title>Hypertune — Ultimate PC Optimization for Gaming &amp; Esports</title>
   <meta name="description" content="Achieve higher FPS, cleaner performance, and minimal latency. Hypertune offers remote system tuning, BIOS tweaks, GPU overclocking — trusted by top-tier gamers." />
   <link rel="preload" href="/assets/fonts/InterDisplay/InterDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/styles/main.css" />
+  <script src="/scripts/asset-manifest.js" defer></script>
   <script src="/scripts/main.js" defer></script>
   <link rel="stylesheet" href="/styles/pricing.css" />
   <script src="/scripts/pricing.js" defer></script>
@@ -20,7 +22,7 @@
         <!-- Móvil -->
         <div class="nav__mobile">
           <a href="/" class="nav__logo" aria-label="Hypertune home">
-            <img src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
+            <img data-local-src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
           </a>
           <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="side-menu" data-menu-open>
             <span class="burger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -30,10 +32,10 @@
         <div class="nav__desktop">
           <ul class="nav__list">
             <li class="nav__item"><a href="/" class="nav__link" aria-label="Hypertune home">
-              <img class="nav__logo-img" src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
+              <img class="nav__logo-img" data-local-src="/assets/navbar/hypertune-logo.svg" alt="Hypertune Logo" width="32" height="32" data-asset-fallback="logo" />
             </a></li>
             <li class="nav__item"><a href="#hero" class="nav__link" data-scroll-top>Home</a></li>
-            <li class="nav__item"><a href="/expert-tuning" class="nav__link">Expert Tuning</a></li>
+            <li class="nav__item"><a href="https://hypertune.gg/expert-tuning" class="nav__link">Expert Tuning</a></li>
             <li class="nav__item"><a href="#showcase" class="nav__link">About</a></li>
             <li class="nav__item"><a href="#faq" class="nav__link">FAQ</a></li>
             <li class="nav__item"><a href="https://discord.com/invite/hypertune" class="nav__link">Contact</a></li>
@@ -53,7 +55,7 @@
         <button class="side-menu__close" type="button" aria-label="Close menu" data-menu-close>&times;</button>
         <ul class="side-menu__list">
           <li><a href="#hero" data-menu-close data-scroll-top>Home</a></li>
-          <li><a href="/expert-tuning">Expert Tuning</a></li>
+          <li><a href="https://hypertune.gg/expert-tuning">Expert Tuning</a></li>
           <li><a href="#showcase" data-menu-close>About</a></li>
           <li><a href="#faq" data-menu-close>FAQ</a></li>
           <li><a href="https://discord.com/invite/hypertune">Contact</a></li>
@@ -70,25 +72,22 @@
         <section class="hero" id="hero">
           <div class="hero__media">
             <div class="hero__video-frame">
-              <!-- El titular grande va renderizado dentro del vídeo (no hay <h1> visible en el original). -->
+              <!-- El vídeo local contiene la app; el titular se renderiza como texto accesible. -->
               <video class="hero__video" muted autoplay playsinline preload="auto" data-hero-video>
-                <source src="/assets/hero/intro_v2_mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
-                <source src="/assets/hero/intro_v2.mp4" type="video/mp4" media="(min-width: 768px)" />
+                <source data-local-src="/assets/hero/intro_v2_mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
+                <source src="/assets/hero/intro_v2.mp4" data-local-src="/assets/hero/intro_v2.mp4" type="video/mp4" media="(min-width: 768px)" />
               </video>
-              <div class="hero__placeholder" data-hero-placeholder hidden>
-                <span class="hero__placeholder-label">Vídeo hero pendiente<br /><code>/assets/hero/intro_v2(_mobile).mp4</code></span>
-              </div>
+              <div class="hero__placeholder" data-hero-placeholder role="img" aria-label="Hero video unavailable" hidden></div>
             </div>
           </div>
 
-          <h1 class="sr-only">Hypertune — PC optimization software for gaming</h1>
 
           <div class="hero__content" data-reveal="content">
             <div class="hero__stack">
               <div class="hero__copy">
                 <div class="hero__badge-slot" aria-hidden="true"></div>
                 <div class="hero__text">
-                  <div class="hero__headline-slot" data-reveal="zoom"></div>
+                  <div class="hero__headline-slot" data-reveal="zoom"><h1 class="hero__headline">Boost your gaming<br />performance with one click</h1></div>
                   <p class="hero__subtitle">Hypertune is a PC optimization software built by the performance specialists at Compready. Get more frames, smoother play, and less lag.</p>
                 </div>
               </div>
@@ -104,16 +103,17 @@
 
       <!-- ===================== INTRODUCING ===================== -->
       <section class="introducing section-shell" id="showcase" aria-labelledby="introducing-title">
-        <header class="section-heading" data-section-reveal><p class="eyebrow">Introducing Hypertune</p><h2 id="introducing-title">Hypertune optimizes your PC<br class="desktop-break" /> on the hardware level.</h2></header>
+        <header class="section-heading" data-section-reveal><p class="eyebrow">Introducing Hypertune</p><h2 id="introducing-title">Hypertune optimizes your<br class="desktop-break" /> PC on the hardware level.</h2></header>
         <div class="feature-tabs" role="tablist" aria-label="Optimization features"><button type="button" role="tab" id="feature-tab-0" aria-controls="feature-panel-0" aria-selected="true" tabindex="0">CPU Overclocking</button><button type="button" role="tab" id="feature-tab-1" aria-controls="feature-panel-1" aria-selected="false" tabindex="-1">GPU Smart Autoclock</button><button type="button" role="tab" id="feature-tab-2" aria-controls="feature-panel-2" aria-selected="false" tabindex="-1">Memory Optimization</button><button type="button" role="tab" id="feature-tab-3" aria-controls="feature-panel-3" aria-selected="false" tabindex="-1">Network Optimization</button><button type="button" role="tab" id="feature-tab-4" aria-controls="feature-panel-4" aria-selected="false" tabindex="-1">Selective Features</button></div>
-        <div class="feature-stage"><div class="feature-panel is-active" role="tabpanel" id="feature-panel-0" aria-labelledby="feature-tab-0" ><div class="media-placeholder" role="img" aria-label="CPU Overclocking screenshot unavailable"></div><img src="/assets/introducing/cpu-overclocking.png" alt="CPU Overclocking" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-1" aria-labelledby="feature-tab-1" inert><div class="media-placeholder" role="img" aria-label="GPU Smart Autoclock screenshot unavailable"></div><img src="/assets/introducing/gpu-smart-autoclock.png" alt="GPU Smart Autoclock" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-2" aria-labelledby="feature-tab-2" inert><div class="media-placeholder" role="img" aria-label="Memory Optimization screenshot unavailable"></div><img src="/assets/introducing/memory-optimization.png" alt="Memory Optimization" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-3" aria-labelledby="feature-tab-3" inert><div class="media-placeholder" role="img" aria-label="Network Optimization screenshot unavailable"></div><img src="/assets/introducing/network-optimization.png" alt="Network Optimization" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-4" aria-labelledby="feature-tab-4" inert><div class="media-placeholder" role="img" aria-label="Selective Features screenshot unavailable"></div><img src="/assets/introducing/selective-features.png" alt="Selective Features" data-section-asset /></div></div>
+        <div class="feature-stage"><div class="feature-panel is-active" role="tabpanel" id="feature-panel-0" aria-labelledby="feature-tab-0" ><div class="media-placeholder" role="img" aria-label="CPU Overclocking screenshot unavailable"></div><img data-local-src="/assets/introducing/cpu-overclocking.png" alt="CPU Overclocking" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-1" aria-labelledby="feature-tab-1" inert><div class="media-placeholder" role="img" aria-label="GPU Smart Autoclock screenshot unavailable"></div><img data-local-src="/assets/introducing/gpu-smart-autoclock.png" alt="GPU Smart Autoclock" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-2" aria-labelledby="feature-tab-2" inert><div class="media-placeholder" role="img" aria-label="Memory Optimization screenshot unavailable"></div><img data-local-src="/assets/introducing/memory-optimization.png" alt="Memory Optimization" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-3" aria-labelledby="feature-tab-3" inert><div class="media-placeholder" role="img" aria-label="Network Optimization screenshot unavailable"></div><img data-local-src="/assets/introducing/network-optimization.png" alt="Network Optimization" data-section-asset /></div><div class="feature-panel " role="tabpanel" id="feature-panel-4" aria-labelledby="feature-tab-4" inert><div class="media-placeholder" role="img" aria-label="Selective Features screenshot unavailable"></div><img data-local-src="/assets/introducing/selective-features.png" alt="Selective Features" data-section-asset /></div></div>
+        <p class="feature-description" data-feature-description>CPU Overclock pushes your processor beyond stock speeds by fine-tuning frequency, voltage, and power limits for maximum performance.</p>
         <div class="feature-controls"><button class="carousel-arrow" type="button" data-feature-prev aria-label="Previous feature">‹</button><p data-feature-label aria-live="polite">CPU Overclocking</p><button class="carousel-arrow" type="button" data-feature-next aria-label="Next feature">›</button></div>
-        <figure class="feature-quote"><div class="quote-avatar"><img src="/assets/introducing/avatar.png" alt="" data-section-asset /></div><div><blockquote>“They optimized my PC, it's so good!”</blockquote><figcaption>tarik</figcaption></div></figure>
+        <figure class="feature-quote"><blockquote>“They optimized my PC, it's so good!”</blockquote><div class="feature-quote__person"><div class="quote-avatar"><img data-local-src="/assets/introducing/avatar.png" alt="" data-section-asset /></div><figcaption>Tarik</figcaption></div></figure>
       </section>
       <!-- ===================== GAMES ===================== -->
       <section class="games-section" id="games-showcase" aria-labelledby="games-title">
-        <header class="section-heading section-shell" data-section-reveal><h2 id="games-title">Boosts FPS in all games.</h2><p>Hypertune safely optimizes your PC on hardware level,<br class="desktop-break" /> without triggering any anti-cheat.</p></header>
-        <div class="games-viewport" role="region" aria-roledescription="carousel" aria-label="Games performance" tabindex="0"><div class="games-track"><article class="game-card" tabindex="0" aria-label="BATTLEFIELD 6"><img src="/assets/games/battlefield-6.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>BATTLEFIELD 6</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="COUNTER-STRIKE 2"><img src="/assets/games/cs-2.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>COUNTER-STRIKE 2</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="CALL OF DUTY BO3"><img src="/assets/games/call-of-duty-bo3.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>CALL OF DUTY BO3</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="DEADLOCK"><img src="/assets/games/deadlock.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>DEADLOCK</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="FORTNITE"><img src="/assets/games/fortnite.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>FORTNITE</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="MARVEL RIVALS"><img src="/assets/games/marvel-rivals.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>MARVEL RIVALS</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="OVERWATCH"><img src="/assets/games/overwatch.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>OVERWATCH</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="RUST"><img src="/assets/games/rust.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>RUST</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="VALORANT"><img src="/assets/games/valorant.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>VALORANT</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article></div></div>
+        <header class="section-heading section-shell" data-section-reveal><h2 id="games-title">Boosts FPS in all games</h2><p>Hypertune safely optimizes your PC on hardware level,<br class="desktop-break" /> without triggering any anti-cheat.</p></header>
+        <div class="games-viewport" role="region" aria-roledescription="carousel" aria-label="Games performance" tabindex="0"><div class="games-track"><article class="game-card" tabindex="0" aria-label="BATTLEFIELD 6"><img data-local-src="/assets/games/battlefield-6.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>BATTLEFIELD 6</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="COUNTER-STRIKE 2"><img data-local-src="/assets/games/cs-2.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>COUNTER-STRIKE 2</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="CALL OF DUTY BO3"><img data-local-src="/assets/games/call-of-duty-bo3.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>CALL OF DUTY BO3</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="DEADLOCK"><img data-local-src="/assets/games/deadlock.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>DEADLOCK</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="FORTNITE"><img data-local-src="/assets/games/fortnite.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>FORTNITE</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="MARVEL RIVALS"><img data-local-src="/assets/games/marvel-rivals.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>MARVEL RIVALS</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="OVERWATCH"><img data-local-src="/assets/games/overwatch.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>OVERWATCH</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="RUST"><img data-local-src="/assets/games/rust.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>RUST</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="VALORANT"><img data-local-src="/assets/games/valorant.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>VALORANT</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article></div></div>
         <div class="games-controls"><button class="carousel-arrow" type="button" data-game-prev aria-label="Previous game">‹</button><button class="carousel-arrow" type="button" data-game-next aria-label="Next game">›</button></div>
       </section>
       <!-- PRICING:START -->
@@ -151,7 +151,7 @@
       <section class="work-section" id="ram" aria-labelledby="work-title"><div class="work-sticky section-shell">
         <header class="section-heading"><p class="eyebrow">How it works</p><h2 id="work-title">You can't download RAM,<br /> but you can ‘download’ FPS.</h2></header>
         <div class="work-progress" role="progressbar" aria-label="Optimization progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span>Progress</span><span data-work-percent>0%</span><div class="work-progress__track"><div class="work-progress__fill"></div></div></div>
-        <div class="work-timeline"><div class="work-line" aria-hidden="true"><div></div></div><ol class="work-steps"><li class="work-step"><span class="work-step__number">01</span><h3>Download Hypertune</h3></li><li class="work-step"><span class="work-step__number">02</span><h3>Scan your computer</h3></li><li class="work-step"><span class="work-step__number">03</span><h3>Run optimization</h3></li><li class="work-step"><span class="work-step__number">04</span><h3>Get FPS boost</h3></li></ol></div>
+        <div class="work-timeline"><div class="work-line" aria-hidden="true"><div></div></div><ol class="work-steps"><li class="work-step"><span class="work-step__number">01</span><h3>Download Hypertune</h3><p>Lightweight installer, zero bloat. You're up and running in under a minute.</p></li><li class="work-step"><span class="work-step__number">02</span><h3>Scan your computer</h3><p>Install in seconds and scan your system for instant performance improvements.</p></li><li class="work-step"><span class="work-step__number">03</span><h3>Run optimization</h3><p>We read your hardware, drivers, and Windows config to find what's choking your frames.</p></li><li class="work-step"><span class="work-step__number">04</span><h3>Get FPS boost</h3><p>One click applies hundreds of hardware-tuned tweaks. Reversible and anti-cheat safe.</p></li></ol></div>
       </div></section>
       <!-- ===================== CTA ===================== -->
       <section class="closing-cta" id="call-to-action" aria-labelledby="closing-cta-title">
@@ -178,11 +178,11 @@
     <footer class="closing-footer" aria-label="Site footer">
       <div class="closing-footer__visual">
         <div class="closing-footer__art" aria-hidden="true">
-          <div class="closing-footer__wordmark"><img src="/assets/footer/hypertune.svg" alt="" width="1000" height="363" loading="lazy" data-footer-asset /></div>
-          <img class="closing-footer__lightning" src="/assets/footer/lightning-1.png" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
-          <img class="closing-footer__lightning" src="/assets/footer/lightning-2.png" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
-          <img class="closing-footer__lightning" src="/assets/footer/lightning-3.png" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
-          <img class="closing-footer__crypto" src="/assets/footer/crypto.svg" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
+          <div class="closing-footer__wordmark"><img data-local-src="/assets/footer/hypertune.svg" alt="" width="1000" height="363" loading="lazy" data-footer-asset /></div>
+          <img class="closing-footer__lightning" data-local-src="/assets/footer/lightning-1.png" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
+          <img class="closing-footer__lightning" data-local-src="/assets/footer/lightning-2.png" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
+          <img class="closing-footer__lightning" data-local-src="/assets/footer/lightning-3.png" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
+          <img class="closing-footer__crypto" data-local-src="/assets/footer/crypto.svg" alt="" width="1920" height="354" loading="lazy" data-footer-asset />
         </div>
         <p class="closing-footer__message" data-final-reveal>Hey, you.<br />It's time to start winning again.</p>
       </div>
