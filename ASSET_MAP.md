@@ -142,3 +142,10 @@ No tiene recursos. El icono "+" es texto o CSS.
 - **Descargados (7 archivos + 2 licencias):** Inter Display ×4 y DM Mono ×1.
 - **Identificados y no descargados:** unos 60 recursos (imágenes, vídeos, SVG y Rive), todos propietarios o de terceros.
 - **Favicon:** `/favicon.ico` ⛔ propietario.
+
+## Actualización — Pricing (etapa 4)
+
+- Se mantienen las rutas originales previstas de los seis iconos de Pricing (`tools`, `speed`, `gamepad`, `cup`, `eraser`, `cpu`): siguen ausentes. Cada uno conserva un placeholder neutro de 12×12 px dentro de un espacio de 18×18 px. Al añadir los SVG en las rutas de esta tabla, el control compartido activa sus máscaras plateadas automáticamente.
+- El aro de 727 px, los raíles de 25+25 px y los soportes laterales son geometría CSS recuperada del HTML de referencia; no precisan imágenes nuevas. Los SVG ornamentales de tornillos y la insignia no están disponibles como recursos locales: se usan círculos neutros y un carácter decorativo, respectivamente; no se afirma identidad de esos detalles con los SVG originales.
+- Página independiente: el HTML archivado de `/pricing` también referencia `/images/tutorial/background.png` (1440×1253), que no está incluido. Ruta local reservada: `public/assets/pricing/background.png`. Se conserva el fondo oscuro neutro; pendiente incorporar el original para completar la fidelidad de la página.
+- No se han descargado imágenes, iconos propietarios, fuentes adicionales ni generado imágenes.

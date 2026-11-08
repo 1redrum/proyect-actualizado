@@ -1,0 +1,29 @@
+<!-- Shared Pricing source. Run python scripts/render-pricing.py after editing. -->
+<section class="pricing {{variant}}" id="pricing-card" aria-labelledby="pricing-title">
+  <header class="pricing__heading">
+    {{heading}}
+  </header>
+  <div class="pricing__decoration" aria-hidden="true"><div class="pricing__ring"></div><div class="pricing__rails"><span></span><span></span></div></div>
+  <div class="pricing__panel">
+    <span class="pricing__lug pricing__lug--left" aria-hidden="true"></span><span class="pricing__lug pricing__lug--right" aria-hidden="true"></span>
+    <span class="pricing__screw pricing__screw--tl" aria-hidden="true"></span><span class="pricing__screw pricing__screw--tr" aria-hidden="true"></span><span class="pricing__screw pricing__screw--bl" aria-hidden="true"></span><span class="pricing__screw pricing__screw--br" aria-hidden="true"></span>
+    <div class="pricing__content">
+      <div class="pricing__intro"><h3>Get Hypertune</h3>{{mobile_heading}}<p>{{panel_subtitle}}</p></div>
+      <fieldset class="pricing__plans" id="pricing-plans"><legend class="sr-only">Choose a billing plan</legend>
+        <label class="pricing__plan"><input type="radio" name="billing-plan" value="yearly" checked /><span class="pricing__plan-surface"><span class="pricing__plan-name">Yearly</span><span class="pricing__saving"><span aria-hidden="true">✦</span> SAVE 42%</span><span class="pricing__amount">{{old_price}}<span>$69.99</span><small>/year</small></span></span></label>
+        <label class="pricing__plan"><input type="radio" name="billing-plan" value="monthly" /><span class="pricing__plan-surface"><span class="pricing__plan-name">Monthly</span><span class="pricing__amount"><span>$9.99</span><small>/month</small></span></span></label>
+      </fieldset>
+      <div class="pricing__details">
+        <ul class="pricing__features">
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/tools.svg')" aria-hidden="true"></span>Smart Optimization Engine</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/speed.svg')" aria-hidden="true"></span>System Health Dashboard</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/gamepad.svg')" aria-hidden="true"></span>Game Mode Presets</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/cup.svg')" aria-hidden="true"></span>Benchmark Leaderboards</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/eraser.svg')" aria-hidden="true"></span>Deep-Level PC Cleaning</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/cpu.svg')" aria-hidden="true"></span>{{overclocking}}</li>
+        </ul>
+        <div class="pricing__actions"><div class="btn-silver">{{action}}</div>{{footnote}}</div>
+      </div>
+    </div>
+  </div>
+</section>

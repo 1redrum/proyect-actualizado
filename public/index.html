@@ -8,6 +8,8 @@
   <link rel="preload" href="/assets/fonts/InterDisplay/InterDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/styles/main.css" />
   <script src="/scripts/main.js" defer></script>
+  <link rel="stylesheet" href="/styles/pricing.css" />
+  <script src="/scripts/pricing.js" defer></script>
 </head>
 <body>
   <div class="page">
@@ -38,7 +40,7 @@
             <li class="nav__item"><a href="/pricing" class="nav__link">Pricing</a></li>
           </ul>
           <ul class="nav__list">
-            <li class="nav__item"><a href="https://app.hypertune.gg/sign-in" class="nav__link">Log In</a></li>
+            <li class="nav__boost btn-silver"><a href="/pricing" class="btn-silver__inner">Boost my performance</a></li>
           </ul>
         </div>
       </div>
@@ -56,7 +58,7 @@
           <li><a href="#faq" data-menu-close>FAQ</a></li>
           <li><a href="https://discord.com/invite/hypertune">Contact</a></li>
           <li><a href="/pricing">Pricing</a></li>
-          <li><a href="https://app.hypertune.gg/sign-in">Log In</a></li>
+          <li><a href="/pricing">Boost my performance</a></li>
         </ul>
       </aside>
     </div>
@@ -114,13 +116,44 @@
         <div class="games-viewport" role="region" aria-roledescription="carousel" aria-label="Games performance" tabindex="0"><div class="games-track"><article class="game-card" tabindex="0" aria-label="BATTLEFIELD 6"><img src="/assets/games/battlefield-6.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>BATTLEFIELD 6</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="COUNTER-STRIKE 2"><img src="/assets/games/cs-2.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>COUNTER-STRIKE 2</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="CALL OF DUTY BO3"><img src="/assets/games/call-of-duty-bo3.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>CALL OF DUTY BO3</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="DEADLOCK"><img src="/assets/games/deadlock.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>DEADLOCK</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="FORTNITE"><img src="/assets/games/fortnite.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>FORTNITE</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="MARVEL RIVALS"><img src="/assets/games/marvel-rivals.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>MARVEL RIVALS</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="OVERWATCH"><img src="/assets/games/overwatch.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>OVERWATCH</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="RUST"><img src="/assets/games/rust.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>RUST</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article><article class="game-card" tabindex="0" aria-label="VALORANT"><img src="/assets/games/valorant.png" alt="" draggable="false" data-section-asset /><div class="game-card__caption"><h3>VALORANT</h3><p>Average boost <span>↗ 18–140 FPS</span></p></div></article></div></div>
         <div class="games-controls"><button class="carousel-arrow" type="button" data-game-prev aria-label="Previous game">‹</button><button class="carousel-arrow" type="button" data-game-next aria-label="Next game">›</button></div>
       </section>
+      <!-- PRICING:START -->
+<!-- Shared Pricing source. Run python scripts/render-pricing.py after editing. -->
+<section class="pricing pricing--home" id="pricing-card" aria-labelledby="pricing-title">
+  <header class="pricing__heading">
+    <p class="pricing__eyebrow">Pricing</p><h2 id="pricing-title">Next level power is one click away.</h2>
+  </header>
+  <div class="pricing__decoration" aria-hidden="true"><div class="pricing__ring"></div><div class="pricing__rails"><span></span><span></span></div></div>
+  <div class="pricing__panel">
+    <span class="pricing__lug pricing__lug--left" aria-hidden="true"></span><span class="pricing__lug pricing__lug--right" aria-hidden="true"></span>
+    <span class="pricing__screw pricing__screw--tl" aria-hidden="true"></span><span class="pricing__screw pricing__screw--tr" aria-hidden="true"></span><span class="pricing__screw pricing__screw--bl" aria-hidden="true"></span><span class="pricing__screw pricing__screw--br" aria-hidden="true"></span>
+    <div class="pricing__content">
+      <div class="pricing__intro"><h3>Get Hypertune</h3><p class="pricing__mobile-title" aria-hidden="true">Next level power is<br /> one click away.</p><p>Get Hypertune</p></div>
+      <fieldset class="pricing__plans" id="pricing-plans"><legend class="sr-only">Choose a billing plan</legend>
+        <label class="pricing__plan"><input type="radio" name="billing-plan" value="yearly" checked /><span class="pricing__plan-surface"><span class="pricing__plan-name">Yearly</span><span class="pricing__saving"><span aria-hidden="true">✦</span> SAVE 42%</span><span class="pricing__amount"><span>$69.99</span><small>/year</small></span></span></label>
+        <label class="pricing__plan"><input type="radio" name="billing-plan" value="monthly" /><span class="pricing__plan-surface"><span class="pricing__plan-name">Monthly</span><span class="pricing__amount"><span>$9.99</span><small>/month</small></span></span></label>
+      </fieldset>
+      <div class="pricing__details">
+        <ul class="pricing__features">
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/tools.svg')" aria-hidden="true"></span>Smart Optimization Engine</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/speed.svg')" aria-hidden="true"></span>System Health Dashboard</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/gamepad.svg')" aria-hidden="true"></span>Game Mode Presets</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/cup.svg')" aria-hidden="true"></span>Benchmark Leaderboards</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/eraser.svg')" aria-hidden="true"></span>Deep-Level PC Cleaning</li>
+          <li><span class="pricing__icon" style="--pricing-icon: url('/assets/pricing/icons/cpu.svg')" aria-hidden="true"></span>Auto CPU/GPU Overclocking</li>
+        </ul>
+        <div class="pricing__actions"><div class="btn-silver"><a class="btn-silver__inner" href="/pricing" data-pricing-link>Unlock your Performance</a></div><p class="pricing__team"><span>Want Hypertune for the whole team?</span> <a href="https://discord.com/invite/hypertune">Contact Us.</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+      <!-- PRICING:END -->
       <!-- ===================== HOW IT WORKS ===================== -->
       <section class="work-section" id="ram" aria-labelledby="work-title"><div class="work-sticky section-shell">
         <header class="section-heading"><p class="eyebrow">How it works</p><h2 id="work-title">You can't download RAM,<br /> but you can ‘download’ FPS.</h2></header>
         <div class="work-progress" role="progressbar" aria-label="Optimization progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span>Progress</span><span data-work-percent>0%</span><div class="work-progress__track"><div class="work-progress__fill"></div></div></div>
         <div class="work-timeline"><div class="work-line" aria-hidden="true"><div></div></div><ol class="work-steps"><li class="work-step"><span class="work-step__number">01</span><h3>Download Hypertune</h3></li><li class="work-step"><span class="work-step__number">02</span><h3>Scan your computer</h3></li><li class="work-step"><span class="work-step__number">03</span><h3>Run optimization</h3></li><li class="work-step"><span class="work-step__number">04</span><h3>Get FPS boost</h3></li></ol></div>
       </div></section>
-      <!-- Pricing, CTA, FAQ y Footer pendientes. -->
+      <!-- CTA, FAQ y Footer pendientes. -->
     </main>
   </div>
 </body>

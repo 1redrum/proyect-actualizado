@@ -59,3 +59,31 @@ La documentación no conserva dimensiones de las capturas, todos los espaciados,
 - Pricing (incluida `/pricing`), CTA, FAQ y Footer permanecen pendientes y no se han implementado.
 - Las secciones extra no se han añadido.
 - Siguen ausentes logo de Navbar y vídeo móvil del Hero; no se modificaron esas secciones.
+
+## Etapa 4 — Pricing en home y `/pricing` (8 nov 2026)
+
+### Implementación
+- [x] Sección `#pricing-card` añadida entre Games y How it works, respetando el orden de referencia. No se han modificado Hero, Introducing, Games ni How it works.
+- [x] Página estática independiente en `public/pricing/index.html`, accesible en `/pricing` (el servidor estático puede normalizar a `/pricing/`). No necesita SPA, paquetes ni cambios en Netlify.
+- [x] Fuente compartida `components/pricing.html`, renderizada por `python scripts/render-pricing.py` en ambas páginas. La página independiente reutiliza también el head y Navbar de la home, con enlaces de retorno `/#hero`, `/#showcase` y `/#faq`. Los HTML resultantes están incluidos: no se requiere generar nada para servirlos.
+- [x] CSS y controles compartidos en `public/styles/pricing.css` y `public/scripts/pricing.js`. Se conservan los archivos y la estructura estática anterior.
+- [x] Diseño específico de la referencia: panel 480×750 px en home, aro 727 px, raíles 25+25 px, soportes 30×67 px, fondo #0E0F10, radio 16 px, sombras en tres capas, planes de 89 px y radio 8 px, borde y fondo con los degradados originales, blur, selección verde, SAVE 42%, seis features y CTA plateado reutilizado con shine sweep. Mobile: panel de 800 px y ancho 98% de la caja interior, titular dentro del panel, sin aro/raíles. Tipografías locales Inter Display; cifras en Inter como el HTML original.
+- [x] Yearly $69.99/year y Monthly $9.99/month con radios nativos accesibles, ratón y teclado; plan no seleccionado al 50% de opacidad. Entrada al viewport con fade/translate y soporte de movimiento reducido.
+- [x] Home: eyebrow Pricing, titular “Next level power is one click away.”, “Unlock your Performance” enlazado a `/pricing`, y enlace de equipo a Discord. La selección Monthly se conserva al pasar a `/pricing?plan=monthly`.
+- [x] Página independiente: encabezado “The cheapest upgrade you'll ever buy.” y subtítulo del HTML archivado, panel desktop 480×700 px a 340 px del inicio, panel móvil a 460 px, precio anual anterior $119.88 tachado, “Smart Overclocking” y pie de garantía. No se incluyen las secciones Tutorial/CTA/Footer de esa ruta porque quedan fuera del alcance solicitado.
+- [x] Navbar: el espacio derecho que contenía Log In ahora contiene el CTA plateado “Boost my performance” a `/pricing`; la misma sustitución en el menú móvil. Se ajustan solo paddings/gaps de navegación de 768–1199 px para alojarlo. No se implementa login ni registro.
+- [x] `/pricing` desactiva su botón de compra, con indicación accesible de preview. No se conecta onboarding, autenticación, checkout ni pagos. Los dos planes siguen siendo seleccionables.
+- [x] Guardas mínimas en main.js para que Navbar y menú funcionen en una página sin vídeo Hero ni tabs de home; sin cambios en los algoritmos anteriores.
+
+### Referencia y limitaciones
+Se consultó exclusivamente el HTML archivado de la home y de `/pricing` para recuperar las medidas y diferencias que no estaban detalladas en la documentación. No se cambió de referencia a la home en vivo. Siguen ausentes los seis SVG de features, el arte inline de tornillos/insignia y el fondo específico de `/pricing`; quedan documentados en ASSET_MAP.md. La geometría CSS, tamaños, textos y colores se han cotejado con el markup; no se declara una comparación píxel a píxel con el CSS archivado, que no está disponible.
+
+### Estado actual
+Terminados: Navbar, Hero, Introducing, Boosts FPS, Pricing (home y página independiente), How it works. Pendientes: CTA, FAQ y Footer. Las listas de etapas anteriores son registros históricos.
+
+### Verificación de la etapa 4
+- Sintaxis de `main.js` y `pricing.js` correcta; generación estática repetible sin diferencias al regenerar. El proyecto no tiene un paso de compilación ni dependencias que instalar.
+- Chromium/Playwright: home y `/pricing` a 1440, 1024, 768, 390 y 320 px. Respuesta HTTP 200 tras normalización de ruta, radios Yearly/Monthly con click y flechas de teclado, seis features, una sola instancia de panel, plan Monthly conservado al navegar, CTA de compra desactivado solo en la página independiente; sin excepciones JS, sin overflow horizontal ni contenido fuera del panel.
+- Navegación desde Navbar desktop y menú móvil, recarga directa de `/pricing/`, retorno a About en home y movimiento reducido a 1440, 1280, 1024, 768, 390 y 320 px. Contenido de ambos precios visible también sin JavaScript.
+- Regresión de etapa 3: tabs/teclado, carrusel circular/arrastre y progreso 0/50/100 pasan en 1440 y 390 px. Comparación con HEAD confirma que el HTML de Hero, Introducing, Games y How it works, todos los assets y `main.css` permanecen intactos.
+- Capturas de Pricing revisadas visualmente en desktop y móvil; iconos/fondo originales ausentes se mantienen como limitación explícita, no como errores de JavaScript.

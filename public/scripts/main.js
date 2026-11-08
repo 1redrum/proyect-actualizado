@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---- Hero: vídeo de fondo; placeholder neutro si el archivo no existe ---- */
   const video = document.querySelector("[data-hero-video]");
+  if (video) {
   const placeholder = document.querySelector("[data-hero-placeholder]");
   const showPlaceholder = () => { placeholder.hidden = false; video.style.visibility = "hidden"; };
   const check = () => { if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) showPlaceholder(); };
@@ -48,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
   check();
   const p = video.play && video.play();
   if (p && p.catch) p.catch(() => {});
+
+  }
 
   /* ---- Animaciones de entrada ---- */
   requestAnimationFrame(() => requestAnimationFrame(() =>
@@ -63,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else img.addEventListener("error", missing, { once: true });
   });
   const tabs = [...document.querySelectorAll('.feature-tabs [role="tab"]')];
+  if (!tabs.length) return; // /pricing reuses the Navbar without home-only sections.
   const panels = [...document.querySelectorAll('.feature-panel')];
   let feature = 0;
   function selectFeature(index, focus = false) {
