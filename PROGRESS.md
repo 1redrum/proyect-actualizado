@@ -87,3 +87,28 @@ Terminados: Navbar, Hero, Introducing, Boosts FPS, Pricing (home y página indep
 - Navegación desde Navbar desktop y menú móvil, recarga directa de `/pricing/`, retorno a About en home y movimiento reducido a 1440, 1280, 1024, 768, 390 y 320 px. Contenido de ambos precios visible también sin JavaScript.
 - Regresión de etapa 3: tabs/teclado, carrusel circular/arrastre y progreso 0/50/100 pasan en 1440 y 390 px. Comparación con HEAD confirma que el HTML de Hero, Introducing, Games y How it works, todos los assets y `main.css` permanecen intactos.
 - Capturas de Pricing revisadas visualmente en desktop y móvil; iconos/fondo originales ausentes se mantienen como limitación explícita, no como errores de JavaScript.
+
+## Etapa 5 — CTA, FAQ y Footer (8 nov 2026)
+
+### Implementación
+- [x] Añadidas exclusivamente CTA y FAQ tras How it works, y Footer semántico fuera de `<main>`, en `public/index.html`. No se añaden Testimonials ni Join, que son secciones extra.
+- [x] CTA: titular y subtítulo originales, composición centrada con gaps de 16 px, botón plateado existente de 250 px, vídeo desktop con loop/muted/playsinline y altura clamp(300px,36vw,520px); variante móvil de 630 px, fondo #131516 y sin descarga de vídeo. Tipografías y tamaños por breakpoint recuperados de la referencia. El botón abre `/pricing`, sin enlazar onboarding ni añadir autenticación.
+- [x] FAQ: siete preguntas y respuestas exactas del HTML de referencia ya guardado. Ancho máximo 639 px, separación de filas 15 px, filas #14161770 con hover #141617, radios de 10 px, paddings de 24/14 px, títulos Inter Display y respuestas a 15 px/135%. Encabezado alineado a la izquierda en móvil y centrado desde md; espaciados de sección 20/32/60/100/120 px, según referencia.
+- [x] Acordeón mediante `<details>/<summary>` accesibles; funciona sin JS. Mejora progresiva con apertura/cierre animados de 350 ms, un elemento abierto, rotación del símbolo +, control de cancelación en pulsaciones rápidas, estados aria-expanded e inert durante cierre, Enter/Espacio y foco mediante flechas/Home/End. Respeta movimiento reducido.
+- [x] JSON-LD FAQPage dentro de la sección FAQ; coincide con los textos visibles y no se copia al head de la página de Pricing mediante el generador.
+- [x] Footer: franja visual de 300 px, mensaje original, composición de medios con las rutas previstas, resplandor radial #13F287 al 50%, línea separadora de 2 px, barra desktop de 80 px y layout vertical móvil. Enlaces con subrayado verde de 500 ms e iconos sociales con elevación/color al hover; foco visible.
+- [x] Destinos válidos: `/pricing` para Pricing/Try for free; `https://hypertune.gg/terms-of-service` y `/policy` del sitio original para los documentos legales, evitando rutas locales inexistentes. Discord, X y LinkedIn conservan los destinos del HTML de referencia; los enlaces en nueva pestaña incluyen noopener/noreferrer.
+- [x] Entradas al viewport de los bloques nuevos; vídeo pausado fuera de pantalla o al ocultar la pestaña, y desactivado con movimiento reducido. No se implementa login, registro, pagos ni autenticación.
+
+### Recursos y fidelidad
+Siguen ausentes el vídeo de CTA, el logotipo grande, los tres rayos, el patrón Crypto y los SVG sociales del Footer. Se documentan en ASSET_MAP.md; se mantienen cajas/fondos neutros y placeholders tipográficos para los iconos sociales. Las dimensiones, composición y tipografía se cotejaron con el HTML guardado y ANIMATIONS.md. La réplica no puede reproducir el arte original ausente ni declarar equivalencia píxel a píxel sin esos recursos y el CSS archivado. No se han descargado ni generado imágenes nuevas.
+
+### Verificación
+- Chromium/Playwright en 1440, 1024, 768, 390 y 320 px: apertura de las siete respuestas, cierre, exclusividad, Enter/Espacio, Home/End, pulsaciones rápidas, aria-expanded e inert; sin excepciones JS ni overflow horizontal.
+- FAQ funcional sin JavaScript; `/pricing/` también sigue cargando sin JS. Enlace FAQ del menú móvil y preferencia de movimiento reducido comprobados. Móvil no solicita el vídeo desktop de CTA.
+- JSON-LD contrastado automáticamente contra las siete preguntas y respuestas visibles. Enlaces legales, Discord, X y LinkedIn respondieron HTTP 200 desde este entorno; los dos enlaces locales de Footer y el de CTA apuntan a la página `/pricing` existente.
+- Capturas desktop/móvil de CTA, FAQ y Footer revisadas. Sintaxis de JS correcta; no hay proceso de compilación en este sitio estático.
+- Regresión de tabs, carrusel/arrastre y progreso por scroll en 1440 y 390 px correcta. Comparación con HEAD: HTML de Navbar y las cinco secciones anteriores intacto; los estilos y controles previos se conservan como prefijo y solo se añade código para las secciones nuevas. Assets, página independiente y componentes de Pricing sin modificar.
+
+### Estado actual
+Las nueve secciones objetivo están implementadas: Navbar, Hero, Introducing, Boosts FPS, Pricing, How it works, CTA, FAQ y Footer. Pricing también dispone de `/pricing`. Pendiente: incorporar los medios originales ausentes y validar la fidelidad visual completa con ellos. Las secciones extra no se han añadido.

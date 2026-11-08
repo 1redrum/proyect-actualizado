@@ -1,6 +1,6 @@
 # hypertune-replica
 
-Réplica visual de la landing de https://hypertune.gg/. **Estado: etapa 4** (Navbar, Hero, Introducing, Games, Pricing y How it works como sitio estático en `public/`). Ver `PROGRESS.md`.
+Réplica visual de la landing de https://hypertune.gg/. **Estado: etapa 5** (las nueve secciones objetivo implementadas como sitio estático en `public/`, con página `/pricing/`). Ver `PROGRESS.md`.
 
 ## Contenido
 - `PROJECT_CONTEXT.md`: versión de referencia, estructura de secciones y decisiones pendientes.

@@ -149,3 +149,11 @@ No tiene recursos. El icono "+" es texto o CSS.
 - El aro de 727 px, los raíles de 25+25 px y los soportes laterales son geometría CSS recuperada del HTML de referencia; no precisan imágenes nuevas. Los SVG ornamentales de tornillos y la insignia no están disponibles como recursos locales: se usan círculos neutros y un carácter decorativo, respectivamente; no se afirma identidad de esos detalles con los SVG originales.
 - Página independiente: el HTML archivado de `/pricing` también referencia `/images/tutorial/background.png` (1440×1253), que no está incluido. Ruta local reservada: `public/assets/pricing/background.png`. Se conserva el fondo oscuro neutro; pendiente incorporar el original para completar la fidelidad de la página.
 - No se han descargado imágenes, iconos propietarios, fuentes adicionales ni generado imágenes.
+
+## Actualización — CTA, FAQ y Footer (etapa 5)
+
+- Disponibles y reutilizadas: fuentes locales Inter Display; estilos del botón plateado existentes. No hay medios originales de estas tres secciones en el ZIP actual.
+- `public/assets/cta/cta.mp4` sigue ausente. El `<video>` conserva esa ruta, con loop/muted/playsinline; solo solicita el recurso en desktop y sin preferencia de movimiento reducido. El fondo neutro #131516 permanece si falta el vídeo. Móvil usa el bloque de 630 px sin vídeo descrito en ANIMATIONS.md.
+- Footer: siguen ausentes `public/assets/footer/hypertune.svg`, `lightning-1.png`, `lightning-2.png`, `lightning-3.png` y `crypto.svg`. Las cajas conservan posiciones y proporciones; se oculta la imagen rota, sin sustituirla por arte inventado. Permanecen el resplandor verde y la línea degradada CSS del original.
+- Iconos sociales originales no disponibles: placeholders tipográficos de 24×24 px (D, X, in), con nombres accesibles y enlaces originales. Se documenta esta diferencia visual; no se han descargado imágenes ni generado SVG/imágenes.
+- FAQ no necesita imágenes. Las siete preguntas y respuestas se recuperaron del HTML archivado guardado en la sesión y se reproducen también en JSON-LD FAQPage.

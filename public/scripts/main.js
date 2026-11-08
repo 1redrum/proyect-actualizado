@@ -152,3 +152,79 @@ document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .15 });
   document.querySelectorAll('[data-section-reveal]').forEach(el => observer.observe(el));
 });
+
+/* Etapa 5 — FAQ progresivo y medios de las secciones finales. */
+document.addEventListener('DOMContentLoaded', () => {
+  const entries = [...document.querySelectorAll('.faq-item')];
+  const desired = new WeakMap();
+  const animations = new WeakMap();
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  function expand(item, open) {
+    const answer = item.querySelector('.faq-item__answer');
+    const start = item.open ? answer.getBoundingClientRect().height : 0;
+    animations.get(item)?.cancel();
+    desired.set(item, open);
+    item.querySelector('summary').setAttribute('aria-expanded', String(open));
+    item.classList.toggle('is-closing', !open);
+    item.open = true;
+    // Closing content leaves the accessibility tree immediately, while its
+    // visual height finishes animating. Native details remains the no-JS path.
+    answer.inert = !open;
+    const animation = answer.animate([{ height: `${start}px` }, { height: `${open ? answer.scrollHeight : 0}px` }], {
+      duration: reducedMotion.matches ? 0 : 350, easing: 'cubic-bezier(.4,0,.2,1)'
+    });
+    animations.set(item, animation);
+    animation.onfinish = () => {
+      if (desired.get(item) !== open) return;
+      item.open = open;
+      item.classList.remove('is-closing');
+      animations.delete(item);
+    };
+  }
+  entries.forEach((item, index) => {
+    desired.set(item, item.open);
+    const summary = item.querySelector('summary');
+    summary.setAttribute('aria-expanded', String(item.open));
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      const open = !desired.get(item);
+      if (open) entries.forEach(other => { if (other !== item && desired.get(other)) expand(other, false); });
+      expand(item, open);
+    });
+    summary.addEventListener('keydown', event => {
+      const target = { ArrowDown: (index + 1) % entries.length, ArrowUp: (index + entries.length - 1) % entries.length, Home: 0, End: entries.length - 1 }[event.key];
+      if (target !== undefined) { event.preventDefault(); entries[target].querySelector('summary').focus(); }
+    });
+  });
+
+  document.querySelectorAll('[data-footer-asset]').forEach(img => {
+    const missing = () => { img.style.visibility = 'hidden'; };
+    if (img.complete && !img.naturalWidth) missing();
+    else img.addEventListener('error', missing, { once: true });
+  });
+  const reveal = new IntersectionObserver(items => items.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('is-visible'); reveal.unobserve(entry.target); }
+  }), { threshold: .15 });
+  document.querySelectorAll('[data-final-reveal]').forEach(el => reveal.observe(el));
+
+  const video = document.querySelector('[data-cta-video]');
+  if (!video) return;
+  const desktop = matchMedia('(min-width: 768px)');
+  let visible = false;
+  const syncVideo = () => {
+    if (desktop.matches && !reducedMotion.matches) {
+      if (!video.getAttribute('src')) video.src = video.dataset.src;
+      if (visible && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    } else {
+      video.pause();
+      if (video.hasAttribute('src')) { video.removeAttribute('src'); video.load(); }
+    }
+  };
+  video.addEventListener('error', () => { video.style.visibility = 'hidden'; });
+  const mediaObserver = new IntersectionObserver(items => { visible = items[0].isIntersecting; syncVideo(); });
+  mediaObserver.observe(video.closest('.closing-cta'));
+  desktop.addEventListener('change', syncVideo);
+  reducedMotion.addEventListener('change', syncVideo);
+  document.addEventListener('visibilitychange', syncVideo);
+});
